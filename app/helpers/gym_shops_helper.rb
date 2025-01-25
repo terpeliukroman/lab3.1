@@ -1,0 +1,2 @@
+module GymShopsHelper
+end

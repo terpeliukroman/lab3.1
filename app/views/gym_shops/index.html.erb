@@ -1,0 +1,29 @@
+<h1 class="text-center mb-5">Товари спортзалу</h1>
+
+<% if user_signed_in? %>
+  <%= link_to 'Додати спортзал', new_gym_shop_path, class: 'btn btn-primary d-block mx-auto mb-4' %>
+<% end %>
+
+<table class="table text-white">
+  <thead class="border border-bottom border-light">
+    <tr>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @gym_shops.each do |gym_shop| %>
+      <tr class="border border-bottom border-light">
+        <td><%= link_to gym_shop.name, gym_shop %></td>
+        <td><%= gym_shop.description %></td>
+        <td class="d-flex">
+          <% if user_signed_in? && gym_shop.user == current_user %>
+            <%= link_to 'Редагувати', edit_gym_shop_path(gym_shop), class: 'btn btn-primary' %>
+            <%= button_to 'Видалити', gym_shop, method: :delete, data: { confirm: 'Ви впевнені?' }, class: 'btn btn-danger ml-3' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
